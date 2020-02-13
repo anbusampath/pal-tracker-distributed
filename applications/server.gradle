@@ -5,6 +5,8 @@ dependencies {
     compile project(":components:rest-support")
 
     compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 
     compile "com.zaxxer:HikariCP:$hikariVersion"
     compile "mysql:mysql-connector-java:$mysqlVersion"
@@ -12,3 +14,10 @@ dependencies {
 
     testCompile project(":components:test-support")
 }
+
+dependencyManagement {
+    imports {
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:$springCloudServicesClientLibrariesVersion"
+    }
+}
+
