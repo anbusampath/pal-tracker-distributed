@@ -15,7 +15,7 @@ import static io.pivotal.pal.tracker.timesheets.data.TimeEntryFields.timeEntryFi
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/time-entries")
+//@RequestMapping("/time-entries")
 public class TimeEntryController {
 
     private final TimeEntryDataGateway gateway;
@@ -27,7 +27,7 @@ public class TimeEntryController {
     }
 
 
-    @PostMapping
+    @PostMapping("/time-entries")
     public ResponseEntity<TimeEntryInfo> create(@RequestBody TimeEntryForm form) {
         if (projectIsActive(form.projectId)) {
             TimeEntryRecord record = gateway.create(mapToFields(form));
@@ -36,7 +36,7 @@ public class TimeEntryController {
         return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    @GetMapping
+    @GetMapping("/time-entries")
     public List<TimeEntryInfo> list(@RequestParam long userId) {
         return gateway.findAllByUserId(userId).stream()
             .map(this::present)
